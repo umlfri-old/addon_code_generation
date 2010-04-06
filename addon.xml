@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AddOn xmlns="http://umlfri.org/xmlschema/addon.xsd">
+    <Identity uri="urn:umlfri.org:plugin:codeGeneration" />
+
+    <FriendlyName name="Code generation" version="0.0.1" />
+    <Author>
+        <Name name="Marian Kubincanek | Tomas Chabada" />
+        <Homepage url="http://umlfri.org" />
+
+        <CommonLicense name="GPL-2" />
+    </Author>
+
+<!--    <Icon path="icons/pythonTerminal.png" />-->
+    <Description>
+        Shows code generation options.
+    </Description>
+
+    <Plugin>
+        <Code os="all" language="python" path="plugin" />
+    </Plugin>
+</AddOn>
