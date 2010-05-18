@@ -13,6 +13,7 @@ class CFile(CCodeContainer):
         self.sufix = sufix
           
     def Generate(self, element, path, fil = None):
+        print "element at Generate(): ", element
         name, = self.GetVariables(element, 'name')
         ret = [True, ""]
         if self.count == 0:
