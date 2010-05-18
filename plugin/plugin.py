@@ -20,32 +20,26 @@ class pluginMain(object):
         Constructor
         '''
         
-        app = interface.GetAdapter();
-        guiMan = app.GetGuiManager();
-        m = guiMan.GetMainMenu();
-        for t in m.GetItems():
+        self.app = interface.GetAdapter();
+        self.guiMan = self.app.GetGuiManager();
+        self.m = self.guiMan.GetMainMenu();
+        for t in self.m.GetItems():
             if t.GetGuiId() == 'mItemProject':
                 break;
-        sm = t.GetSubmenu();
-        sm.AddMenuItem('test', self.generateCodeFormularCallback, -1, 'Generate');
+        self.sm = t.GetSubmenu();
+        self.sm.AddMenuItem('test', self.generateCodeFormularCallback, -1, 'Generate');
         
     def generateCodeFormularCallback(self, widget):
         buffer = [];
         buffer.append(widget);
        
-        print "buffer callback content: ", buffer
+#        print "buffer callback content: ", buffer
         
-        # TODO find path
-        self.Storage = open_storage(os.path.join(ROOT_PATH, 'etc', 'uml'))
+        self.Storage = open_storage(ROOT_PATH)
         self.CodeEngineering = CLanguageFactory(self.Storage,SOURCECODE_PATH)
-#        clan = CLanguageFactory(storage, path);
-        #clan = CLanguageFactory();
-#        clan.Load('generator/codeTemplate/cplusplus_template.xml')
-#        clan.Load('generator/codeTemplate/delphi_template.xml')
-#        clan.Load('generator/codeTemplate/html_documentation.xml')
-#        clan.Load('generator/codeTemplate/python_temlate.xml')
-        # path where to save generate code
-        gen = CGenerator(self.application.GetProject().GetCodeEngineering().GetType(self.cbTargetLanguage.get_active_text()), 'C:\Users\kubincam\Desktop')
-#        gen = CGenerator(clan.GetType(''), 'C:\Users\kubincam\Desktop')
+        gen = CGenerator(self.CodeEngineering.GetType('Delphi'), 'C:\Users\kubincam\Desktop')
+        # TODO get selected element as Object 
+        elementObj = self.app.GetCurrentDiagram().GetSelectedElements()[0].GetObject()
         
-                     
+        gen.GenerateElement(elementObj)
+                           

@@ -20,15 +20,17 @@ class CCodeObject:
         self.parent = parent
        
     def ParseVariables(self, elementObject, *vals):
+        print "values are: ",vals
         for val in vals:
             if not isinstance(val, (str, unicode)):
                 yield val
             elif val[0] == '#':
-                yield elementObject.GetProperty(val[1:])
+#                yield elementObject.GetProperty(val[1:])
+                yield elementObject.GetValue(val[1:])
             elif val[0] == '@':
                 yield elementObject.__LOOPVARS__[val[1:]]
             elif val[0] == '{':
-                yield elementObject.GetProperty(val.split('}')[0][1:]) + val.split('}')[1]
+                yield elementObject.GetValue(val.split('}')[0][1:]) + val.split('}')[1]
             else:
                 yield val
     

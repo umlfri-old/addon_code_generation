@@ -18,7 +18,7 @@ class CGenerator:
         return self.path
     
     def GenerateElement(self, elementObj):
-        template = self.type.GetElement(elementObj.GetType().GetId())
+        template = self.type.GetElement(elementObj.GetType())
         template.Generate(self.type.GetElements(), elementObj, self.path)
     
     def GenerateDocumentation(self, name, project, rootNode = None):

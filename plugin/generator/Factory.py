@@ -10,7 +10,6 @@ class CLanguageFactory:
     def __init__(self, storage, path):
         print "som v CLanguageFactory constructor"
         self.types = {}
-        print "Source path is: ", path
         self.path = path
         self.storage = storage
         for file in storage.listdir(path):
@@ -29,6 +28,7 @@ class CLanguageFactory:
         return self.types[language]        
     
     def __Load(self, filePath):
+        print "FilePath at Load(): ",filePath
         dom = xml.dom.minidom.parseString(self.storage.read_file(filePath))
         root = dom.documentElement
         if root.tagName != 'Template':
