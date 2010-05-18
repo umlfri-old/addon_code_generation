@@ -1,5 +1,5 @@
 from CodeObject import CCodeObject
-from lib.consts import ICONS_PATH, TMP_IMAGES, STYLE_PATH
+from generator.consts import ICONS_PATH, TMP_IMAGES, STYLE_PATH
 import os.path
 import glob
 
