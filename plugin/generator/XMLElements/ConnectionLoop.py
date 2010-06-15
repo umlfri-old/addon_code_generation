@@ -2,6 +2,7 @@
 from CodeContainer import CCodeContainer
 from Property import CProperty
 from PropertyLoop import CPropertyLoop
+from generator.HelperModule import GetProperty
 
 class CConnectionLoop(CCodeContainer):
     
@@ -25,9 +26,14 @@ class CConnectionLoop(CCodeContainer):
         retFlag = False
         separatorFlag = False
         for id, item in enumerate(elementObject.GetConnections()):
-            if item.GetProperty(self.collection) == self.value or self.value == "All":
+            if GetProperty(item, self.collection) == self.value or self.value == "All":
                 for i in self.childs:
-                    elementObject.__LOOPVARS__ = item.GetProperty()
+                    elementObject.__LOOPVARS__ = {
+                    'dest': item.GetDestination(),
+                    'name': item.GetValue('name'),
+                    'source': item.GetSource(),
+                    'type': item.GetType()
+                    }
                     genList = i.Generate(elementObject, path, fil)
                     ret = self.JoinReturnValue(ret, genList)
                     if isinstance(i, CProperty) and genList[0]:
