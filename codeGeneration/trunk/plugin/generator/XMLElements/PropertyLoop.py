@@ -40,7 +40,7 @@ class CPropertyLoop(CCodeContainer):
                     for k,v in params.items():
                         part[k] = v[id]
                     for ch in self.childs:
-                        elementObject.__LOOPVARS__ = part
+                        elementObject.GetValue = part
                         genList = ch.Generate(elementObject, path, fil)
                         ret = self.JoinReturnValue(ret, genList)
                         if isinstance(ch, (CCodeContainer)) and genList[0]:
