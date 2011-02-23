@@ -37,7 +37,7 @@ class pluginMain(object):
         
         self.Storage = open_storage(ROOT_PATH)
         self.CodeEngineering = CLanguageFactory(self.Storage,SOURCECODE_PATH)
-        gen = CGenerator(self.CodeEngineering.GetType('Delphi'), '/home/tomas')
+        gen = CGenerator(self.CodeEngineering.GetType('Delphi'), '/home/janik/tmp/aqw')
         # TODO get selected element as Object 
         elementObj = self.app.GetCurrentDiagram().GetSelectedElements()[0].GetObject()
         
