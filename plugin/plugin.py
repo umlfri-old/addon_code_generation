@@ -30,7 +30,7 @@ class pluginMain:
         self.__i.gui_manager.main_menu.items["mItemDiagram"].submenu.items["mItemCodeEngineering"].submenu.add_menu_item("mItemGenerateCode", self.openCodeGeneratingWindow, 0, "_Generate code", True, None)
 
     def openCodeGeneratingWindow(self, widget):
-        self.__gtkBuilder.add_from_file("share\\addons\\codeGenerator\\plugin\\generateCodeWindow.glade")
+        self.__gtkBuilder.add_from_file("share\\addons\\codeGeneration\\plugin\\generateCodeWindow.glade")
         self.__codeGeneratingWindow = self.__gtkBuilder.get_object("generateSourceCodeWindow")
         self.__codeGeneratingWindow.set_keep_above(True)
         self.__codeGeneratingWindow.set_modal(True)
