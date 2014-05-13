@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AddOn xmlns="http://umlfri.org/xmlschema/addon.xsd">
-    <Identity uri="urn:umlfri.org:plugin:codeGeneration" />
+    <Identity uri="urn:umlfri.org:plugin:codeGenerator" />
 
-    <FriendlyName name="Code generation" version="0.0.1" />
+    <FriendlyName name="Code generator" version="0.0.1" />
     <Author>
-        <Name name="Marian Kubincanek | Tomas Chabada" />
+        <Name name="Jozef Pala" />
         <Homepage url="http://umlfri.org" />
 
         <CommonLicense name="GPL-2" />
     </Author>
 
-<!--    <Icon path="icons/pythonTerminal.png" />-->
+    <Icon path="icons/pythonTerminal.png" />
+
     <Description>
-        Shows code generation options.
+        Generates code based on template inside diagram add-ons.
     </Description>
 
+    <Dependencies>
+        <AddOn uri="urn:umlfri.org:starters:python" />
+    </Dependencies>
+
     <Plugin>
-        <Code os="all" language="python" path="plugin" />
+        <Code os="all" language="pythonNew" path="plugin" />
     </Plugin>
 </AddOn>
