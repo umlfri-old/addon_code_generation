@@ -8,6 +8,8 @@
       <column type="gchararray"/>
       <!-- column-name Type -->
       <column type="gchararray"/>
+      <!-- column-name Index -->
+      <column type="gint"/>
     </columns>
   </object>
   <object class="GtkWindow" id="generateSourceCodeWindow">
@@ -256,6 +258,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="xalign">0.49000000953674316</property>
               </object>
               <packing>
                 <property name="expand">False</property>
