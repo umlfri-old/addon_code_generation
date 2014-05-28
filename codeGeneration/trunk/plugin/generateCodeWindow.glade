@@ -2,6 +2,14 @@
 <interface>
   <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="objectViewListStore">
+    <columns>
+      <!-- column-name Object -->
+      <column type="gchararray"/>
+      <!-- column-name Type -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="generateSourceCodeWindow">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Generate source code</property>
@@ -162,7 +170,7 @@
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
                 <property name="xpad">5</property>
-                <property name="label" translatable="yes">Select object to generate</property>
+                <property name="label" translatable="yes">Select objects to generate</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -204,6 +212,28 @@
                 <property name="can_focus">True</property>
                 <property name="model">objectViewListStore</property>
                 <property name="search_column">0</property>
+                <child>
+                  <object class="GtkTreeViewColumn" id="Object">
+                    <property name="title" translatable="yes">Object</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn" id="Type">
+                    <property name="title" translatable="yes">Type</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                      <attributes>
+                        <attribute name="text">1</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
@@ -256,15 +286,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkListStore" id="objectViewListStore">
-    <columns>
-      <!-- column-name Generate -->
-      <column type="gboolean"/>
-      <!-- column-name Object -->
-      <column type="gchararray"/>
-      <!-- column-name Type -->
-      <column type="gchararray"/>
-    </columns>
   </object>
 </interface>
