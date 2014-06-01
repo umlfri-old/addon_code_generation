@@ -1,4 +1,5 @@
 import gtk
+from os.path import expanduser, isdir
 
 """
 Class to define code generating window.
@@ -20,6 +21,7 @@ class CodeGeneratingWindow:
         self.__window.set_transient_for(None)
         self.__window.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_DIALOG)
         # Assign events.
+        self.__gtkBuilder.get_object("selectFolderButton").connect("clicked",lambda x:self.selectFolderButtonClicked())
         self.__gtkBuilder.get_object("cancelButton").connect("clicked",lambda x:self.cancelButtonClicked())
         self.__gtkBuilder.get_object("generateButton").connect("clicked",lambda x:self.generateButtonClicked())
         self.__gtkBuilder.get_object("selectAll").connect("clicked",lambda x:self.selectAllClicked())
@@ -123,3 +125,20 @@ class CodeGeneratingWindow:
     """
     def includeChildrenClicked(self):
         self.loadData()
+
+    """
+    Opens window to selected target folder and processes result.
+    """
+    def selectFolderButtonClicked(self):
+        folderEntry = self.__gtkBuilder.get_object("targetFolder")
+        chooser = gtk.FileChooserDialog(title="Select target folder", parent=self.__window, action = gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER, buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK))
+        chooser.set_keep_above(True)
+        if folderEntry.get_text().strip() == "" or not isdir(folderEntry.get_text()):
+            chooser.set_current_folder(expanduser("~"))
+        else:
+            chooser.set_current_folder(folderEntry.get_text())
+        chooser.set_default_response(gtk.RESPONSE_OK)
+        response = chooser.run()
+        if response == gtk.RESPONSE_OK:
+            folderEntry.set_text(chooser.get_filename())
+        chooser.destroy()
