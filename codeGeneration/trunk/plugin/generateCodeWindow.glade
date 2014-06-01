@@ -2,16 +2,6 @@
 <interface>
   <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkListStore" id="objectViewListStore">
-    <columns>
-      <!-- column-name Object -->
-      <column type="gchararray"/>
-      <!-- column-name Type -->
-      <column type="gchararray"/>
-      <!-- column-name Index -->
-      <column type="gint"/>
-    </columns>
-  </object>
   <object class="GtkWindow" id="generateSourceCodeWindow">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Generate source code</property>
@@ -289,5 +279,15 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="objectViewListStore">
+    <columns>
+      <!-- column-name Object -->
+      <column type="gchararray"/>
+      <!-- column-name Type -->
+      <column type="gchararray"/>
+      <!-- column-name Index -->
+      <column type="gint"/>
+    </columns>
   </object>
 </interface>

@@ -23,6 +23,7 @@ class CodeGeneratingWindow:
         self.__gtkBuilder.get_object("cancelButton").connect("clicked",lambda x:self.cancelButtonClicked())
         self.__gtkBuilder.get_object("generateButton").connect("clicked",lambda x:self.generateButtonClicked())
         self.__gtkBuilder.get_object("selectAll").connect("clicked",lambda x:self.selectAllClicked())
+        self.__gtkBuilder.get_object("includeChildPackages").connect("clicked",lambda x:self.includeChildrenClicked())
 
     """
     Shows code generating window.
@@ -32,6 +33,7 @@ class CodeGeneratingWindow:
 
     """
     Loads data (visual elements in diagram) to object list.
+    @param includeChildren: True if child elements should be included in the list
     """
     def loadData(self):
         self.__gtkBuilder.get_object("objectView").get_selection().set_mode(gtk.SELECTION_MULTIPLE)
@@ -41,8 +43,32 @@ class CodeGeneratingWindow:
         index = 0
         for element in self.__i.current_diagram.elements:
             elementList.append([element.object.name, element.object.type.name, index])
-            index += 1
             self.__elements.append(element.object)
+            index += 1
+            if (self.includeChildren()):
+                index = self.loadChildren(element.object, 1, elementList, index)
+        if self.selectAll():
+            self.selectAllClicked()
+
+    """
+    Loads child elements for the given element.
+    @param element: child elements of this element object will be loaded to the list
+    @param level: level of the element (elements in former diagram are level 0, children of those elements are level 1,
+                  their children level 2 etc), used to compute indent
+    @param elementList: list of the elements where children will be added
+    @param lastIndex: next index to be assigned to the child element in list
+    @return value of the next index to be used
+    """
+    def loadChildren(self, element, level, elementList, nextIndex):
+        indent = ""
+        for i in range(0, level):
+            indent += "     "
+        for child in element.children:
+            elementList.append([indent+child.name, child.type.name, nextIndex])
+            self.__elements.append(child)
+            nextIndex += 1
+            nextIndex = self.loadChildren(child, level+1, elementList, nextIndex)
+        return nextIndex
 
     """
     Button to generate code was clicked.
@@ -84,3 +110,16 @@ class CodeGeneratingWindow:
     """
     def selectAll(self):
         return self.__gtkBuilder.get_object("selectAll").get_active()
+
+    """
+    Checks if "Include all child packages" check button is checked.
+    @return True if it is checked
+    """
+    def includeChildren(self):
+        return self.__gtkBuilder.get_object("includeChildPackages").get_active()
+
+    """
+    Include child elements in list of objects.
+    """
+    def includeChildrenClicked(self):
+        self.loadData()
