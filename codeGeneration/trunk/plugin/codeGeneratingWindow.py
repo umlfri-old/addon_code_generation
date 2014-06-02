@@ -1,5 +1,7 @@
 import gtk
-from os.path import expanduser, isdir
+from os import listdir
+from os.path import expanduser, isdir, isfile, join
+import xml.dom.minidom as xml
 
 """
 Class to define code generating window.
@@ -38,6 +40,7 @@ class CodeGeneratingWindow:
     @param includeChildren: True if child elements should be included in the list
     """
     def loadData(self):
+        self.loadConverters()
         self.__gtkBuilder.get_object("objectView").get_selection().set_mode(gtk.SELECTION_MULTIPLE)
         elementList = self.__gtkBuilder.get_object("objectView").get_model()
         elementList.clear()
@@ -76,16 +79,23 @@ class CodeGeneratingWindow:
     Button to generate code was clicked.
     """
     def generateButtonClicked(self):
+        # TODO: check form
         elementList = self.__gtkBuilder.get_object("objectView")
+        converterCB = self.__gtkBuilder.get_object("converters")
         (model, paths) = elementList.get_selection().get_selected_rows()
         selectedElements = []
         for path in paths:
             index = model.get_value(model.get_iter(path),2)
             selectedElements.append(self.__elements[index])
+        converterIter = converterCB.get_active_iter()
+        if converterIter is None:
+            selectedConverter = "none converter selected"
+        else:
+            selectedConverter = converterCB.get_model().get_value(converterIter,1)
         # TODO: generating logic, remove following lines, they are just for testing of selection
-        testText = "";
+        testText = "Converter: " + selectedConverter;
         for item in selectedElements:
-            testText += item.name + "\n"
+            testText += "\n" + item.name
         md = gtk.MessageDialog(self.__window, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, testText)
         md.set_keep_above(True)
         md.run()
@@ -142,3 +152,15 @@ class CodeGeneratingWindow:
         if response == gtk.RESPONSE_OK:
             folderEntry.set_text(chooser.get_filename())
         chooser.destroy()
+
+    def loadConverters(self):
+        dir = "share/addons/codeGeneration/converters"
+        converters = [ f for f in listdir(dir) if isfile(join(dir,f)) ]
+        converterList = self.__gtkBuilder.get_object("converters").get_model()
+        diagramName = self.__i.current_diagram.type.name.lower()
+        for converter in converters:
+            converterXML = xml.parse(join(dir, converter))
+            root = converterXML.documentElement
+            if root.tagName == 'Template' and root.hasAttribute("diagram") and root.hasAttribute("name") and root.hasAttribute("type"):
+                if root.getAttribute("diagram").lower() == diagramName or root.getAttribute("diagram").lower() == "all":
+                    converterList.append([root.getAttribute("name") + " (" + root.getAttribute("type") + ")", join(dir, converter)])

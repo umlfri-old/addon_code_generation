@@ -2,14 +2,12 @@
 <interface>
   <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkListStore" id="objectViewListStore">
+  <object class="GtkListStore" id="convertersListStore">
     <columns>
-      <!-- column-name Object -->
+      <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name Type -->
+      <!-- column-name path -->
       <column type="gchararray"/>
-      <!-- column-name Index -->
-      <column type="gint"/>
     </columns>
   </object>
   <object class="GtkWindow" id="generateSourceCodeWindow">
@@ -31,7 +29,7 @@
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
                 <property name="xpad">5</property>
-                <property name="label" translatable="yes">Convertor:</property>
+                <property name="label" translatable="yes">Converter:</property>
               </object>
               <packing>
                 <property name="top_attach">2</property>
@@ -41,9 +39,16 @@
               </packing>
             </child>
             <child>
-              <object class="GtkComboBox" id="targetLanguage">
+              <object class="GtkComboBox" id="converters">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="model">convertersListStore</property>
+                <child>
+                  <object class="GtkCellRendererText" id="converterName"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -290,5 +295,15 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="objectViewListStore">
+    <columns>
+      <!-- column-name Object -->
+      <column type="gchararray"/>
+      <!-- column-name Type -->
+      <column type="gchararray"/>
+      <!-- column-name Index -->
+      <column type="gint"/>
+    </columns>
   </object>
 </interface>
