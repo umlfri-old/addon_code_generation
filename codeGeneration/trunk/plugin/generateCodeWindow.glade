@@ -6,23 +6,36 @@
     <columns>
       <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name path -->
-      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gint"/>
     </columns>
   </object>
   <object class="GtkWindow" id="generateSourceCodeWindow">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Generate source code</property>
     <child>
-      <object class="GtkVBox" id="vbox1">
+      <object class="GtkVBox" id="mainContainer">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkTable" id="table1">
+          <object class="GtkTable" id="tableContainer">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="n_rows">3</property>
+            <property name="n_rows">2</property>
             <property name="n_columns">2</property>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="xpad">5</property>
+                <property name="label" translatable="yes">Target folder:</property>
+              </object>
+              <packing>
+                <property name="x_options">GTK_FILL</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkLabel" id="label3">
                 <property name="visible">True</property>
@@ -32,29 +45,9 @@
                 <property name="label" translatable="yes">Converter:</property>
               </object>
               <packing>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
                 <property name="x_options">GTK_FILL</property>
-                <property name="y_options">GTK_FILL</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="converters">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="model">convertersListStore</property>
-                <child>
-                  <object class="GtkCellRendererText" id="converterName"/>
-                  <attributes>
-                    <attribute name="text">0</attribute>
-                  </attributes>
-                </child>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
@@ -97,53 +90,27 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label2">
+              <object class="GtkComboBox" id="converters">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
-                <property name="xpad">5</property>
-                <property name="label" translatable="yes">Target folder:</property>
-              </object>
-              <packing>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
-                <property name="x_options">GTK_FILL</property>
-                <property name="y_options">GTK_FILL</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">0</property>
-                <property name="xpad">5</property>
-                <property name="label" translatable="yes">Root package:</property>
-              </object>
-              <packing>
-                <property name="x_options">GTK_FILL</property>
-                <property name="y_options">GTK_FILL</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="rootPackage">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
-                <property name="primary_icon_activatable">False</property>
-                <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
+                <property name="model">convertersListStore</property>
+                <child>
+                  <object class="GtkCellRendererText" id="converterName"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
               </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
           </object>

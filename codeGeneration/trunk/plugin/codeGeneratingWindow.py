@@ -2,16 +2,19 @@ import gtk
 from os import listdir
 from os.path import expanduser, isdir, isfile, join
 import xml.dom.minidom as xml
+from Generator import CGenerator
+from Type import CLanguageType
 
-"""
-Class to define code generating window.
-"""
 class CodeGeneratingWindow:
     """
-    Initializes new window.
-    @param interface: API interface
+    Class to define code generating window.
     """
+
     def __init__(self, interface):
+        """
+        Initializes new window.
+        @param interface: API interface
+        """
         self.__i = interface
         self.__gtkBuilder = gtk.Builder()
         self.__gtkBuilder.add_from_file("share\\addons\\codeGeneration\\plugin\\generateCodeWindow.glade")
@@ -22,6 +25,9 @@ class CodeGeneratingWindow:
         self.__window.set_modal(True)
         self.__window.set_transient_for(None)
         self.__window.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_DIALOG)
+        # Hide check button which sets if children elements should be shown
+        # (they are currently generated automatically if parent element is generated)
+        self.__gtkBuilder.get_object("mainContainer").remove(self.__gtkBuilder.get_object("includeChildPackages"))
         # Assign events.
         self.__gtkBuilder.get_object("selectFolderButton").connect("clicked",lambda x:self.selectFolderButtonClicked())
         self.__gtkBuilder.get_object("cancelButton").connect("clicked",lambda x:self.cancelButtonClicked())
@@ -29,17 +35,17 @@ class CodeGeneratingWindow:
         self.__gtkBuilder.get_object("selectAll").connect("clicked",lambda x:self.selectAllClicked())
         self.__gtkBuilder.get_object("includeChildPackages").connect("clicked",lambda x:self.includeChildrenClicked())
 
-    """
-    Shows code generating window.
-    """
     def show(self):
+        """
+        Shows code generating window.
+        """
         self.__window.show_all()
 
-    """
-    Loads data (visual elements in diagram) to object list.
-    @param includeChildren: True if child elements should be included in the list
-    """
     def loadData(self):
+        """
+        Loads data (visual elements in diagram) to object list.
+        @param includeChildren: True if child elements should be included in the list
+        """
         self.loadConverters()
         self.__gtkBuilder.get_object("objectView").get_selection().set_mode(gtk.SELECTION_MULTIPLE)
         elementList = self.__gtkBuilder.get_object("objectView").get_model()
@@ -55,16 +61,16 @@ class CodeGeneratingWindow:
         if self.selectAll():
             self.selectAllClicked()
 
-    """
-    Loads child elements for the given element.
-    @param element: child elements of this element object will be loaded to the list
-    @param level: level of the element (elements in former diagram are level 0, children of those elements are level 1,
-                  their children level 2 etc), used to compute indent
-    @param elementList: list of the elements where children will be added
-    @param lastIndex: next index to be assigned to the child element in list
-    @return value of the next index to be used
-    """
     def loadChildren(self, element, level, elementList, nextIndex):
+        """
+        Loads child elements for the given element.
+        @param element: child elements of this element object will be loaded to the list
+        @param level: level of the element (elements in former diagram are level 0, children of those elements are level 1,
+                      their children level 2 etc), used to compute indent
+        @param elementList: list of the elements where children will be added
+        @param lastIndex: next index to be assigned to the child element in list
+        @return value of the next index to be used
+        """
         indent = ""
         for i in range(0, level):
             indent += "     "
@@ -75,10 +81,10 @@ class CodeGeneratingWindow:
             nextIndex = self.loadChildren(child, level+1, elementList, nextIndex)
         return nextIndex
 
-    """
-    Button to generate code was clicked.
-    """
     def generateButtonClicked(self):
+        """
+        Button to generate code was clicked.
+        """
         # TODO: check form
         elementList = self.__gtkBuilder.get_object("objectView")
         converterCB = self.__gtkBuilder.get_object("converters")
@@ -88,58 +94,53 @@ class CodeGeneratingWindow:
             index = model.get_value(model.get_iter(path),2)
             selectedElements.append(self.__elements[index])
         converterIter = converterCB.get_active_iter()
-        if converterIter is None:
-            selectedConverter = "none converter selected"
-        else:
-            selectedConverter = converterCB.get_model().get_value(converterIter,1)
-        # TODO: generating logic, remove following lines, they are just for testing of selection
-        testText = "Converter: " + selectedConverter;
-        for item in selectedElements:
-            testText += "\n" + item.name
-        md = gtk.MessageDialog(self.__window, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE, testText)
-        md.set_keep_above(True)
-        md.run()
-        md.destroy()
+        selectedConverterRoot = self.__converterRoots[converterCB.get_model().get_value(converterIter,1)]
 
-    """
-    Closes window with no changes.
-    """
+        path = self.__gtkBuilder.get_object("targetFolder").get_text()
+        gen = CGenerator(CLanguageType(selectedConverterRoot), path)
+        for item in selectedElements:
+            gen.GenerateElement(item)
+        #self.__window.hide()
+
     def cancelButtonClicked(self):
+        """
+        Closes window with no changes.
+        """
         self.__window.hide()
 
-    """
-    Selects all elements in list.
-    """
     def selectAllClicked(self):
+        """
+        Selects all elements in list.
+        """
         if self.selectAll():
             self.__gtkBuilder.get_object("objectView").get_selection().select_all()
         else:
             self.__gtkBuilder.get_object("objectView").get_selection().unselect_all()
 
-    """
-    Checks if "select all" check box is checked.
-    @return True if it is selected, False otherwise
-    """
     def selectAll(self):
+        """
+        Checks if "select all" check box is checked.
+        @return True if it is selected, False otherwise
+        """
         return self.__gtkBuilder.get_object("selectAll").get_active()
 
-    """
-    Checks if "Include all child packages" check button is checked.
-    @return True if it is checked
-    """
     def includeChildren(self):
+        """
+        Checks if "Include all child packages" check button is checked.
+        @return True if it is checked
+        """
         return self.__gtkBuilder.get_object("includeChildPackages").get_active()
 
-    """
-    Include child elements in list of objects.
-    """
     def includeChildrenClicked(self):
+        """
+        Include child elements in list of objects.
+        """
         self.loadData()
 
-    """
-    Opens window to selected target folder and processes result.
-    """
     def selectFolderButtonClicked(self):
+        """
+        Opens window to selected target folder and processes result.
+        """
         folderEntry = self.__gtkBuilder.get_object("targetFolder")
         chooser = gtk.FileChooserDialog(title="Select target folder", parent=self.__window, action = gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER, buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK))
         chooser.set_keep_above(True)
@@ -154,13 +155,21 @@ class CodeGeneratingWindow:
         chooser.destroy()
 
     def loadConverters(self):
+        """
+        Loads information about available converters.
+        """
         dir = "share/addons/codeGeneration/converters"
         converters = [ f for f in listdir(dir) if isfile(join(dir,f)) ]
         converterList = self.__gtkBuilder.get_object("converters").get_model()
+        converterList.clear()
         diagramName = self.__i.current_diagram.type.name.lower()
+        id = 0
+        self.__converterRoots = []
         for converter in converters:
             converterXML = xml.parse(join(dir, converter))
             root = converterXML.documentElement
             if root.tagName == 'Template' and root.hasAttribute("diagram") and root.hasAttribute("name") and root.hasAttribute("type"):
                 if root.getAttribute("diagram").lower() == diagramName or root.getAttribute("diagram").lower() == "all":
-                    converterList.append([root.getAttribute("name") + " (" + root.getAttribute("type") + ")", join(dir, converter)])
+                    converterList.append([root.getAttribute("name") + " (" + root.getAttribute("type") + ")", id])
+                    self.__converterRoots.append(root)
+                    id += 0
