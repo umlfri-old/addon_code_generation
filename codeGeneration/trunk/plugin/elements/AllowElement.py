@@ -15,7 +15,7 @@ class CAllowElement(CCodeContainer):
             template = root.GetTemplate(i.type.name)
             if  template is not None:
                 id += 1
-                ret = self.JoinReturnValue(ret, template.Generate(root.GetTemplates(), i.GetObject(), path))
+                ret = self.JoinReturnValue(ret, template.Generate(root.GetTemplates(), i, path))
         
         if id == 0:
             return [False, ""]
