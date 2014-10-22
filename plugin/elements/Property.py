@@ -2,6 +2,8 @@
 from CodeContainer import CCodeContainer
 from lib.lib import ToBool
 from lib.Elements.Object import CElementObject
+from share.addons.pythonStarter.library.org.umlfri.api.model.elementObject import ElementObject
+
 
 class CProperty(CCodeContainer):
     
@@ -20,7 +22,7 @@ class CProperty(CCodeContainer):
         text, = self.GetVariables(element, 'id')
         
         # Ak je vysledkom property elementObject nie text
-        if isinstance(text, CElementObject):
+        if isinstance(text, ElementObject):
             if not self.recursive:
                 if text is not element:
                     for i in self.childs:
