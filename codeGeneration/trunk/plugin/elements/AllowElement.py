@@ -12,7 +12,7 @@ class CAllowElement(CCodeContainer):
         id = 0
         for id, i in enumerate(self.GetNodeSpecifyElements(elementObject, self.id, False)):
             root = self.GetRoot()
-            template = root.GetTemplate(i.type.identity)
+            template = root.GetTemplate(i.type.name)
             if  template is not None:
                 id += 1
                 ret = self.JoinReturnValue(ret, template.Generate(root.GetTemplates(), i.GetObject(), path))
