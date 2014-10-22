@@ -100,7 +100,11 @@ class CodeGeneratingWindow:
         gen = CGenerator(CLanguageType(selectedConverterRoot), path)
         for item in selectedElements:
             gen.GenerateElement(item)
-        #self.__window.hide()
+        message = gtk.MessageDialog(parent=self.__window, type=gtk.MESSAGE_INFO, buttons=gtk.BUTTONS_OK)
+        message.set_markup("Code generation completed.")
+        message.set_keep_above(True)
+        message.run()
+        self.__window.hide()
 
     def cancelButtonClicked(self):
         """
