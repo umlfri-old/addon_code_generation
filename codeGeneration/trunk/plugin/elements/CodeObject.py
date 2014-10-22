@@ -24,13 +24,18 @@ class CCodeObject:
             if not isinstance(val, (str, unicode)):
                 yield val
             elif val[0] == '#':
-                yield elementObject.GetProperty(val[1:])
+                yield self.__GetPropertyFromElement(elementObject, val[1:])
             elif val[0] == '@':
                 yield elementObject.__LOOPVARS__[val[1:]]
             elif val[0] == '{':
-                yield elementObject.GetProperty(val.split('}')[0][1:]) + val.split('}')[1]
+                yield self.__GetPropertyFromElement(elementObject, val.split('}')[0][1:]) + val.split('}')[1]
             else:
                 yield val
+
+    def __GetPropertyFromElement(self, elementObject, propertyName):
+        for property in elementObject.all_values:
+            if (property[0] == propertyName):
+                return property[1]
 
     def GetVariables(self, element, *names):
         return self.ParseVariables(element, *(getattr(self, name) for name in names))
