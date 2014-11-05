@@ -48,9 +48,9 @@ class CPropertyLoop(CCodeContainer):
                     if id < len(params.values()[0]) - 1:
                         ret[1] += self.separator
         else:
-            if elementObject.GetProperty(self.collection) is None or len(elementObject.GetProperty(self.collection)) == 0:
+            if elementObject.values[self.collection] is None or len(elementObject.values[self.collection]) == 0:
                 return [False,""]
-            for item in elementObject.GetProperty(self.collection):
+            for item in eval(elementObject.values[self.collection]): # TODO: Eval has to be removed after API is fixed
                 self.item = item
                 for i in self.childs:
                     elementObject.__LOOPVARS__ = item
