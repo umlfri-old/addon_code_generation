@@ -24,7 +24,7 @@ class CConnectionLoop(CCodeContainer):
         ret = [True, ""]
         retFlag = False
         separatorFlag = False
-        for id, item in enumerate(elementObject.GetConnections()):
+        for id, item in enumerate(elementObject.connections):
             if item.GetProperty(self.collection) == self.value or self.value == "All":
                 for i in self.childs:
                     elementObject.__LOOPVARS__ = item.GetProperty()
