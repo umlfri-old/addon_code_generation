@@ -54,7 +54,7 @@
                         <Optional>
                             <br />
                             '''
-                            <Property id="@doc" />
+                            <Property id="@note" />
                             <br />
                             '''<br />
                         </Optional>
@@ -67,11 +67,11 @@
                     (self
                     <Optional>
                         ,
-                        <PropertyLoop id="@params" separator="," parse="parseParameter">
-                            <Property id="@paramsName" />
+                        <PropertyLoop id="@Parameters" separator="," parse="parseParameter">
+                            <Property id="@Name" />
                             <Optional>
                                 =
-                                <Property id="@paramsDefault" />
+                                <Property id="@Default" />
                             </Optional>     
                         </PropertyLoop> 
                     </Optional>
@@ -79,7 +79,7 @@
                     <Indent required="True">
                         <Optional>
                             '''
-                            <Property id="@doc" />
+                            <Property id="@note" />
                             <br />
                             '''<br />
                         </Optional>
@@ -93,7 +93,7 @@
                                             <Optional>
                                                 <br />
                                                 '''
-                                                <Property id="@doc" />
+                                                <Property id="@note" />
                                                 <br />
                                                 '''<br />
                                             </Optional>
