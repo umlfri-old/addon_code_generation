@@ -51,11 +51,11 @@
                                 <PropertyLoop id="attributes">
                                     <Condition id="@scope" value="private">
                                         <Optional>
-                                            <Property id="@doc" newLine="//"/>
+                                            <Property id="@note" newLine="//"/>
                                             <br />
                                         </Optional>
                                         <Property id="@name" />:
-                                        <Property id="@type" />                     
+                                        <Property id="#Type" />                     
                                         ;
                                     </Condition>
                                 </PropertyLoop>
@@ -63,7 +63,7 @@
                                 <PropertyLoop id="operations">
                                     <Condition id="@scope" value="private">
                                         <Optional>
-                                            <Property id="@doc" newLine="//"/>
+                                            <Property id="@note" newLine="//"/>
                                             <br />
                                         </Optional>
                                         <Condition id="@static" value="True">
@@ -74,12 +74,12 @@
                                             <Property id="@name" />
                                             <Optional>
                                                 (
-                                                <PropertyLoop id="@params" separator="," parse="params">
-                                                    <Property id="@paramsName" />:
-                                                    <Property id="@paramsType" /> 
+                                                <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                    <Property id="@Name" />:
+                                                    <Property id="@Type" /> 
                                                     <Optional>
                                                         =
-                                                        <Property id="@paramsDefault" />
+                                                        <Property id="@Default" />
                                                     </Optional>
                                                 </PropertyLoop>
                                                 )
@@ -90,19 +90,19 @@
                                             <Property id="@name" />
                                             <Optional>
                                                 (
-                                                <PropertyLoop id="@params" separator="," parse="params">
-                                                    <Property id="@paramsName" />:
-                                                    <Property id="@paramsType" /> 
+                                                <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                    <Property id="@Name" />:
+                                                    <Property id="@Type" /> 
                                                     <Optional>
                                                         =
-                                                        <Property id="@paramsDefault" />
+                                                        <Property id="@Default" />
                                                     </Optional>
                                                 </PropertyLoop>
                                                 )
                                             </Optional>
                                         </Condition>
                                         <Condition id="@stereotype" value="constructor|destructor" negate="1">
-                                            <Condition id="@type" value="" negate="1">
+                                            <Condition id="#Type" value="" negate="1">
                                                 <Condition id="@static" value="True">
                                                     class <whitespace />
                                                 </Condition>
@@ -110,21 +110,21 @@
                                                 <Property id="@name" />
                                                 <Optional>
                                                     (
-                                                    <PropertyLoop id="@params" separator="," parse="params">
-                                                        <Property id="@paramsName" />:
-                                                        <Property id="@paramsType" /> 
+                                                    <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                        <Property id="@Name" />:
+                                                        <Property id="@Type" /> 
                                                         <Optional>
                                                             =
-                                                            <Property id="@paramsDefault" />
+                                                            <Property id="@Default" />
                                                         </Optional>
                                                     </PropertyLoop>
                                                     )
                                                 </Optional>
                                                 :
-                                                <Property id="@type" />
+                                                <Property id="#Type" />
                                             </Condition>
                                             
-                                            <Condition id="@type" value="">
+                                            <Condition id="#Type" value="">
                                                 <Condition id="@static" value="True">
                                                     class <whitespace />
                                                 </Condition>
@@ -132,12 +132,12 @@
                                                 <Property id="@name" />
                                                 <Optional>
                                                     (
-                                                    <PropertyLoop id="@params" separator="," parse="params">
-                                                        <Property id="@paramsName" />:
-                                                        <Property id="@paramsType" /> 
+                                                    <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                        <Property id="@Name" />:
+                                                        <Property id="@Type" /> 
                                                         <Optional>
                                                             =
-                                                            <Property id="@paramsDefault" />
+                                                            <Property id="@Default" />
                                                         </Optional>
                                                     </PropertyLoop>
                                                     )
@@ -153,7 +153,7 @@
                                                 virtual; <whitespace />
                                             </Condition>
                                         </Condition>
-                                        <Condition id="@pure" value="True">
+                                        <Condition id="@abstract" value="True">
                                             abstract; <whitespace />
                                         </Condition>
                                         <Condition id="@overload" value="True">
@@ -175,11 +175,11 @@
                                 <PropertyLoop id="attributes">
                                     <Condition id="@scope" value="protected">
                                         <Optional>
-                                            <Property id="@doc" newLine="//"/>
+                                            <Property id="@note" newLine="//"/>
                                             <br />
                                         </Optional>
                                         <Property id="@name" />:
-                                        <Property id="@type" />                     
+                                        <Property id="#Type" />                     
                                         ;
                                     </Condition>
                                 </PropertyLoop>
@@ -187,7 +187,7 @@
                                 <PropertyLoop id="operations">
                                     <Condition id="@scope" value="protected">
                                         <Optional>
-                                            <Property id="@doc" newLine="//"/>
+                                            <Property id="@note" newLine="//"/>
                                             <br />
                                         </Optional>
                                         <Condition id="@stereotype" value="constructor" negate="0">
@@ -195,12 +195,12 @@
                                             <Property id="@name" />
                                             <Optional>
                                                 (
-                                                <PropertyLoop id="@params" separator="," parse="params">
-                                                    <Property id="@paramsName" />:
-                                                    <Property id="@paramsType" /> 
+                                                <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                    <Property id="@Name" />:
+                                                    <Property id="@Type" /> 
                                                     <Optional>
                                                         =
-                                                        <Property id="@paramsDefault" />
+                                                        <Property id="@Default" />
                                                     </Optional>
                                                 </PropertyLoop>
                                                 )
@@ -211,19 +211,19 @@
                                             <Property id="@name" />
                                             <Optional>
                                                 (
-                                                <PropertyLoop id="@params" separator="," parse="params">
-                                                    <Property id="@paramsName" />:
-                                                    <Property id="@paramsType" /> 
+                                                <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                    <Property id="@Name" />:
+                                                    <Property id="@Type" /> 
                                                     <Optional>
                                                         =
-                                                        <Property id="@paramsDefault" />
+                                                        <Property id="@Default" />
                                                     </Optional>
                                                 </PropertyLoop>
                                                 )
                                             </Optional>
                                         </Condition>
                                         <Condition id="@stereotype" value="constructor|destructor" negate="1">
-                                            <Condition id="@type" value="" negate="1">
+                                            <Condition id="#Type" value="" negate="1">
                                                 <Condition id="@static" value="True">
                                                     class <whitespace />
                                                 </Condition>
@@ -231,20 +231,20 @@
                                                 <Property id="@name" />
                                                 <Optional>
                                                     (
-                                                    <PropertyLoop id="@params" separator="," parse="params">
-                                                        <Property id="@paramsName" />:
-                                                        <Property id="@paramsType" /> 
+                                                    <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                        <Property id="@Name" />:
+                                                        <Property id="@Type" /> 
                                                         <Optional>
                                                             =
-                                                            <Property id="@paramsDefault" />
+                                                            <Property id="@Default" />
                                                         </Optional>
                                                     </PropertyLoop>
                                                     )
                                                 </Optional>
-                                                :<Property id="@type" />
+                                                :<Property id="#Type" />
                                             </Condition>
                                             
-                                            <Condition id="@type" value="">
+                                            <Condition id="#Type" value="">
                                                 <Condition id="@static" value="True">
                                                     class <whitespace />
                                                 </Condition>
@@ -252,12 +252,12 @@
                                                 <Property id="@name" />
                                                 <Optional>
                                                     (
-                                                    <PropertyLoop id="@params" separator="," parse="params">
-                                                        <Property id="@paramsName" />:
-                                                        <Property id="@paramsType" /> 
+                                                    <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                        <Property id="@Name" />:
+                                                        <Property id="@Type" /> 
                                                         <Optional>
                                                             =
-                                                            <Property id="@paramsDefault" />
+                                                            <Property id="@Default" />
                                                         </Optional>
                                                     </PropertyLoop>
                                                     )
@@ -273,7 +273,7 @@
                                                 virtual; <whitespace />
                                             </Condition>
                                         </Condition>
-                                        <Condition id="@pure" value="True">
+                                        <Condition id="@abstract" value="True">
                                             abstract; <whitespace />
                                         </Condition>
                                         <Condition id="@overload" value="True">
@@ -295,17 +295,17 @@
                                 <PropertyLoop id="attributes">
                                     <Condition id="@scope" value="public">
                                         <Optional>
-                                            <Property id="@doc" newLine="//"/>
+                                            <Property id="@note" newLine="//"/>
                                             <br />
                                         </Optional>
                                         <Property id="@name" />:
-                                        <Property id="@type" />                     
+                                        <Property id="#Type" />                     
                                         ;
                                     </Condition>
                                     <Condition id="@property" value="True">
                                         property <whitespace />
                                         <Property id="@propertyName" />:
-                                        <Property id="@type" /> 
+                                        <Property id="#Type" /> 
                                         <whitespace />
                                         <Optional>
                                             read <whitespace />
@@ -323,7 +323,7 @@
                                 <PropertyLoop id="operations">
                                     <Condition id="@scope" value="public">
                                         <Optional>
-                                            <Property id="@doc" newLine="//"/>
+                                            <Property id="@note" newLine="//"/>
                                             <br />
                                         </Optional>
                                         <Condition id="@stereotype" value="constructor" negate="0">
@@ -331,12 +331,12 @@
                                             <Property id="@name" />
                                             <Optional>
                                                 (
-                                                <PropertyLoop id="@params" separator="," parse="params">
-                                                    <Property id="@paramsName" />:
-                                                    <Property id="@paramsType" /> 
+                                                <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                    <Property id="@Name" />:
+                                                    <Property id="@Type" /> 
                                                     <Optional>
                                                         =
-                                                        <Property id="@paramsDefault" />
+                                                        <Property id="@Default" />
                                                     </Optional>
                                                 </PropertyLoop>
                                                 )
@@ -347,19 +347,19 @@
                                             <Property id="@name" />
                                             <Optional>
                                                 (
-                                                <PropertyLoop id="@params" separator="," parse="params">
-                                                    <Property id="@paramsName" />:
-                                                    <Property id="@paramsType" /> 
+                                                <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                    <Property id="@Name" />:
+                                                    <Property id="@Type" /> 
                                                     <Optional>
                                                         =
-                                                        <Property id="@paramsDefault" />
+                                                        <Property id="@Default" />
                                                     </Optional>
                                                 </PropertyLoop>
                                                 )
                                             </Optional>
                                         </Condition>
                                         <Condition id="@stereotype" value="constructor|destructor" negate="1">
-                                            <Condition id="@type" value="" negate="1">
+                                            <Condition id="#Type" value="" negate="1">
                                                 <Condition id="@static" value="True">
                                                     class <whitespace />
                                                 </Condition>
@@ -367,20 +367,20 @@
                                                 <Property id="@name" />
                                                 <Optional>
                                                     (
-                                                    <PropertyLoop id="@params" separator="," parse="params">
-                                                        <Property id="@paramsName" />:
-                                                        <Property id="@paramsType" /> 
+                                                    <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                        <Property id="@Name" />:
+                                                        <Property id="@Type" /> 
                                                         <Optional>
                                                             =
-                                                            <Property id="@paramsDefault" />
+                                                            <Property id="@Default" />
                                                         </Optional>
                                                     </PropertyLoop>
                                                     )
                                                 </Optional>
-                                                :<Property id="@type" />
+                                                :<Property id="#Type" />
                                             </Condition>
                                             
-                                            <Condition id="@type" value="">
+                                            <Condition id="#Type" value="">
                                                 <Condition id="@static" value="True">
                                                     class <whitespace />
                                                 </Condition>
@@ -388,12 +388,12 @@
                                                 <Property id="@name" />
                                                 <Optional>
                                                     (
-                                                    <PropertyLoop id="@params" separator="," parse="params">
-                                                        <Property id="@paramsName" />:
-                                                        <Property id="@paramsType" /> 
+                                                    <PropertyLoop id="@Parameters" separator="," parse="params">
+                                                        <Property id="@Name" />:
+                                                        <Property id="@Type" /> 
                                                         <Optional>
                                                             =
-                                                            <Property id="@paramsDefault" />
+                                                            <Property id="@Default" />
                                                         </Optional>
                                                     </PropertyLoop>
                                                     )
@@ -409,7 +409,7 @@
                                                 virtual; <whitespace />
                                             </Condition>
                                         </Condition>
-                                        <Condition id="@pure" value="True">
+                                        <Condition id="@abstract" value="True">
                                             abstract; <whitespace />
                                         </Condition>
                                         <Condition id="@overload" value="True">
@@ -432,19 +432,19 @@
             </Condition>
             <Block>
                 <PropertyLoop id="operations">
-                    <Condition id="@pure" value="False">
+                    <Condition id="@abstract" value="False">
                         <Condition id="@stereotype" value="constructor" negate="0">
                             constructor <whitespace />
                             <Property id="#name" />.
                             <Property id="@name" />
                             <Optional>
                                 (
-                                <PropertyLoop id="@params" separator="," parse="params">
-                                    <Property id="@paramsName" />:
-                                    <Property id="@paramsType" /> 
+                                <PropertyLoop id="@Parameters" separator="," parse="params">
+                                    <Property id="@Name" />:
+                                    <Property id="@Type" /> 
                                     <Optional>
                                         =
-                                        <Property id="@paramsDefault" />
+                                        <Property id="@Default" />
                                     </Optional>
                                 </PropertyLoop>
                                 )
@@ -462,12 +462,12 @@
                             <Property id="@name" />
                             <Optional>
                                 (
-                                <PropertyLoop id="@params" separator="," parse="params">
-                                    <Property id="@paramsName" />:
-                                    <Property id="@paramsType" /> 
+                                <PropertyLoop id="@Parameters" separator="," parse="params">
+                                    <Property id="@Name" />:
+                                    <Property id="@Type" /> 
                                     <Optional>
                                         =
-                                        <Property id="@paramsDefault" />
+                                        <Property id="@Default" />
                                     </Optional>
                                 </PropertyLoop>
                                 )
@@ -480,7 +480,7 @@
                             end; <br />
                         </Condition>
                         <Condition id="@stereotype" value="constructor|destructor" negate="1">
-                            <Condition id="@type" value="" negate="1">
+                            <Condition id="#Type" value="" negate="1">
                                 <Condition id="@static" value="True">
                                     class <whitespace />
                                 </Condition>
@@ -489,17 +489,17 @@
                                 <Property id="@name" />
                                 <Optional>
                                     (
-                                    <PropertyLoop id="@params" separator="," parse="params">
-                                        <Property id="@paramsName" />:
-                                        <Property id="@paramsType" /> 
+                                    <PropertyLoop id="@Parameters" separator="," parse="params">
+                                        <Property id="@Name" />:
+                                        <Property id="@Type" /> 
                                         <Optional>
                                             =
-                                            <Property id="@paramsDefault" />
+                                            <Property id="@Default" />
                                         </Optional>
                                     </PropertyLoop>
                                     )
                                 </Optional>
-                                :<Property id="@type" />
+                                :<Property id="#Type" />
                                 ;<br />
                                 begin <br />
                                 <Indent required="False" defsize="4">
@@ -508,7 +508,7 @@
                                 end; <br />
                             </Condition>
                             
-                            <Condition id="@type" value="">
+                            <Condition id="#Type" value="">
                                 <Condition id="@static" value="True">
                                     class <whitespace />
                                 </Condition>
@@ -517,12 +517,12 @@
                                 <Property id="@name" />
                                 <Optional>
                                     (
-                                    <PropertyLoop id="@params" separator="," parse="params">
-                                        <Property id="@paramsName" />:
-                                        <Property id="@paramsType" /> 
+                                    <PropertyLoop id="@Parameters" separator="," parse="params">
+                                        <Property id="@Name" />:
+                                        <Property id="@Type" /> 
                                         <Optional>
                                             =
-                                            <Property id="@paramsDefault" />
+                                            <Property id="@Default" />
                                         </Optional>
                                     </PropertyLoop>
                                     )
