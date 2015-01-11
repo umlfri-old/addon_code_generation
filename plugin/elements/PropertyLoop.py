@@ -29,24 +29,22 @@ class CPropertyLoop(CCodeContainer):
         ret = [True, ""]
         retFlag = False
         separatorFlag = False
-        if self.parse is not None:
-            if self.collection == "@params":
-                txtParams, = self.GetVariables(elementObject, 'collection')
-                params = elementObject.ParseParams(txtParams)
-                if params is None:
+        if self.parse is not None: # TODO: this "if" could be part of separate class which would iterate over list inside some loopvar parameter
+            if self.collection == "@parameters":
+                parameters = elementObject.__LOOPVARS__[self.parse]
+                if parameters is None or len(parameters) == 0:
                     return [False, ""]
-                for id in xrange(len(params.values()[0])):
-                    part = {}
-                    for k,v in params.items():
-                        part[k] = v[id]
+                i = 0;
+                for parameter in parameters:
                     for ch in self.childs:
-                        elementObject.__LOOPVARS__ = part
+                        elementObject.__LOOPVARS__ = parameter
                         genList = ch.Generate(elementObject, path, fil)
                         ret = self.JoinReturnValue(ret, genList)
                         if isinstance(ch, (CCodeContainer)) and genList[0]:
                             retFlag = True
-                    if id < len(params.values()[0]) - 1:
+                    if i < len(parameters) - 1:
                         ret[1] += self.separator
+                    i += 1
         else:
             if elementObject.values[self.collection] is None or len(elementObject.values[self.collection]) == 0:
                 return [False,""]

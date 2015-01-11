@@ -25,20 +25,20 @@
             :<br required="True" />
             <Indent required="True" defsize="4">
                 <Optional>
-                    '''
-                    <Property id="#Notes" />
+                    '''<br />
+                    <Property id="#note" />
                     <br />
                     '''<br />
                 </Optional>
                 <ConnectionLoop id="type" value="Note Link" separator=", "> 
                     <Property id="@dest">
-                        '''
-                        <Property id="#Notes" /><br />
+                        '''<br />
+                        <Property id="#note" /><br />
                         '''<br />
                     </Property>
                     <Property id="@source">
                         '''<br />
-                        <Property id="#Notes" /><br />
+                        <Property id="#note" /><br />
                         '''<br />
                     </Property>
                 </ConnectionLoop>
@@ -53,7 +53,7 @@
                         <Property id="@default" value=".+" default="None" />
                         <Optional>
                             <br />
-                            '''
+                            '''<br />
                             <Property id="@note" />
                             <br />
                             '''<br />
@@ -66,19 +66,19 @@
                     <Property id="@name" />
                     (self
                     <Optional>
-                        ,
-                        <PropertyLoop id="@Parameters" separator="," parse="parseParameter">
-                            <Property id="@Name" />
+                        , <whitespace />
+                        <PropertyLoop id="@parameters" separator=", " parse="parameters">
+                            <Property id="@name" />
                             <Optional>
                                 =
-                                <Property id="@Default" />
+                                <Property id="@default" />
                             </Optional>     
                         </PropertyLoop> 
                     </Optional>
                     ): <br required="True" />
                     <Indent required="True">
                         <Optional>
-                            '''
+                            '''<br />
                             <Property id="@note" />
                             <br />
                             '''<br />
@@ -92,7 +92,7 @@
                                         <Property id="@default" value=".+" default="None" />
                                             <Optional>
                                                 <br />
-                                                '''
+                                                '''<br />
                                                 <Property id="@note" />
                                                 <br />
                                                 '''<br />
@@ -101,9 +101,9 @@
                                 </PropertyLoop>
                             </Optional>
                         </Condition>
-                        <Condition id="@name" value="__init__" negate="1">
+                        <!--<Condition id="@name" value="__init__" negate="1">
                             <Property id="@initial" default="pass" />
-                        </Condition>
+                        </Condition>-->
                     </Indent>
                     <br />
                 </PropertyLoop>
