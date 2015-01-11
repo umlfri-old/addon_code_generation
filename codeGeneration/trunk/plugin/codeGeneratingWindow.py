@@ -94,7 +94,7 @@ class CodeGeneratingWindow:
             index = model.get_value(model.get_iter(path),2)
             selectedElements.append(self.__elements[index])
         converterIter = converterCB.get_active_iter()
-        selectedConverterRoot = self.__converterRoots[converterCB.get_model().get_value(converterIter,1)]
+        selectedConverterRoot = self.__converterRoots[converterCB.get_model().get_value(converterIter, 1)]
 
         path = self.__gtkBuilder.get_object("targetFolder").get_text()
         gen = CGenerator(CLanguageType(selectedConverterRoot), path)
@@ -176,4 +176,4 @@ class CodeGeneratingWindow:
                 if root.getAttribute("diagram").lower() == diagramName or root.getAttribute("diagram").lower() == "all":
                     converterList.append([root.getAttribute("name") + " (" + root.getAttribute("type") + ")", id])
                     self.__converterRoots.append(root)
-                    id += 0
+                    id += 1

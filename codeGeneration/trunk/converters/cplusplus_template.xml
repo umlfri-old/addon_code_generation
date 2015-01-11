@@ -11,20 +11,20 @@
         <File name="#name" value="[_0-9a-zA-Z]+\.h" sufix=".h">
             <Optional>
                 /**<br />
-                <Property id="#Notes" newLine=" * " />
+                <Property id="#note" newLine=" * " />
                 <br />
-                */<br />
+                <whitespace />*/<br />
             </Optional>
             <ConnectionLoop id="type" value="Note Link" separator=", "> 
                 <Property id="@dest">
                     /**<br />
-                    <Property id="#Notes" newLine=" * " /><br />
-                    */<br />
+                    <Property id="#note" newLine=" * " /><br />
+                    <whitespace />*/<br />
                 </Property>
                 <Property id="@source">
                     /**<br />
-                    <Property id="#Notes" newLine=" * " /><br />
-                    */<br />
+                    <Property id="#note" newLine=" * " /><br />
+                    <whitespace />*/<br />
                 </Property>
             </ConnectionLoop>
             class<whitespace />
@@ -48,27 +48,27 @@
                         </Optional>
                         <Indent>
                             <Alternate>
-                                <Condition id="#scope" value="private">
+                                <Condition id="#scope" value="Private">
                                     <Recursive>
                                         <AllowElement id="Class" />
                                     </Recursive>
                                 </Condition> 
                                 <PropertyLoop id="attributes">
-                                   <Condition id="@scope" value="private">
+                                   <Condition id="@scope" value="Private">
                                         <Optional>
                                             /** <br />
                                             <Property id="@note" newLine=" * "/>
                                             <br />
-                                            */<br />
+                                            <whitespace />*/<br />
                                         </Optional>
                                         <Condition id="@static" value="True">
                                             static <whitespace />
                                         </Condition>
-                                        <Property id="#Type" /> 
+                                        <Property id="@type" />
                                         <whitespace />
-                                        <Condition id="@containment" value="1">
+                                        <!--<Condition id="@containment" value="1">
                                             *
-                                        </Condition>
+                                        </Condition>-->
                                         <Property id="@name" />;
                                     </Condition>
                                 </PropertyLoop>
@@ -98,12 +98,12 @@
                                 </ConnectionLoop>  
                                 <br />
                                 <PropertyLoop id="operations">
-                                    <Condition id="@scope" value="private">
+                                    <Condition id="@scope" value="Private">
                                         <Optional>
                                             /** <br />
                                             <Property id="@note" newLine=" * "/>
                                             <br />
-                                            */<br />
+                                            <whitespace />*/<br />
                                         </Optional>
                                         <Condition id="@abstract" value="True">
                                             virtual <whitespace />
@@ -111,25 +111,25 @@
                                         <Condition id="@static" value="True">
                                             static <whitespace />
                                         </Condition>
-                                        <Condition id="@const" value="True">
+                                        <!--<Condition id="@const" value="True">
                                             const <whitespace />
-                                        </Condition>
-                                        <Property id="#Type" default="void" /> 
+                                        </Condition>-->
+                                        <Property id="@rtype" default="void" />
                                         <whitespace />
                                         <Property id="@name" />
                                         (
-                                        <PropertyLoop id="@Parameters" separator="," parse="params">
-                                            <Property id="@Type" /> <whitespace />
-                                            <Property id="@Name" />
+                                        <PropertyLoop id="@parameters" separator=", " parse="parameters">
+                                            <Property id="@type" /> <whitespace />
+                                            <Property id="@name" />
                                             <Optional>
                                                 =
-                                                <Property id="@Default" />
+                                                <Property id="@default" />
                                             </Optional>     
-                                        </PropertyLoop> 
+                                        </PropertyLoop>
                                         )
-                                        <Condition id="@isquery" value="True">
+                                        <!--<Condition id="@isquery" value="True">
                                             const <whitespace />
-                                        </Condition>
+                                        </Condition>-->
                                         <Condition id="@abstract" value="True">
                                             =0 
                                         </Condition>
@@ -148,38 +148,38 @@
                         </Optional>
                         <Indent>
                             <Alternate>
-                                <Condition id="#scope" value="protected">
+                                <Condition id="#scope" value="Protected">
                                     <Recursive>
                                         <AllowElement id="Class" />
                                     </Recursive>
                                 </Condition> 
                                 <PropertyLoop id="attributes">
-                                    <Condition id="@scope" value="protected">
+                                    <Condition id="@scope" value="Protected">
                                         <Optional>
                                             /** <br />
                                             <Property id="@note" newLine=" * "/>
                                             <br />
-                                            */<br />
+                                            <whitespace />*/<br />
                                         </Optional>
                                         <Condition id="@static" value="True">
                                             static <whitespace />
                                         </Condition>
-                                        <Property id="#Type" /> 
+                                        <Property id="@type" />
                                         <whitespace />
-                                        <Condition id="@containment" value="1">
+                                        <!--<Condition id="@containment" value="1">
                                             *
-                                        </Condition>
+                                        </Condition>-->
                                         <Property id="@name" />;
                                     </Condition>
                                 </PropertyLoop>
                                 <br />
                                 <PropertyLoop id="operations">
-                                    <Condition id="@scope" value="protected">
+                                    <Condition id="@scope" value="Protected">
                                         <Optional>
                                             /** <br />
                                             <Property id="@note" newLine=" * "/>
                                             <br />
-                                            */<br />
+                                            <whitespace />*/<br />
                                         </Optional>
                                         <Condition id="@abstract" value="True">
                                             virtual <whitespace />
@@ -187,25 +187,25 @@
                                         <Condition id="@static" value="True">
                                             static <whitespace />
                                         </Condition>
-                                        <Condition id="@const" value="True">
+                                        <!--<Condition id="@const" value="True">
                                             const <whitespace />
-                                        </Condition>
-                                        <Property id="#Type" default="void" /> 
+                                        </Condition>-->
+                                        <Property id="@rtype" default="void" />
                                         <whitespace />
                                         <Property id="@name" />
                                         (
-                                        <PropertyLoop id="@Parameters" separator="," parse="params">
-                                            <Property id="@Type" /> <whitespace />
-                                            <Property id="@Name" />
+                                        <PropertyLoop id="@parameters" separator=", " parse="parameters">
+                                            <Property id="@type" /> <whitespace />
+                                            <Property id="@name" />
                                             <Optional>
                                                 =
-                                                <Property id="@Default" />
+                                                <Property id="@default" />
                                             </Optional>     
-                                        </PropertyLoop> 
+                                        </PropertyLoop>
                                         )
-                                        <Condition id="@isquery" value="True">
+                                        <!--<Condition id="@isquery" value="True">
                                             const <whitespace />
-                                        </Condition>
+                                        </Condition>-->
                                         <Condition id="@abstract" value="True">
                                             =0 
                                         </Condition>
@@ -223,38 +223,38 @@
                         </Optional>
                         <Indent>
                             <Alternate>
-                                <Condition id="#scope" value="public">
+                                <Condition id="#scope" value="Public">
                                     <Recursive>
                                         <AllowElement id="Class" />
                                     </Recursive>
                                 </Condition> 
                                 <PropertyLoop id="attributes">
-                                    <Condition id="@scope" value="public">
+                                    <Condition id="@scope" value="Public">
                                         <Optional>
                                             /** <br />
                                             <Property id="@note" newLine=" * "/>
                                             <br />
-                                            */<br />
+                                            <whitespace />*/<br />
                                         </Optional>
                                         <Condition id="@static" value="True">
                                             static <whitespace />
                                         </Condition>
-                                        <Property id="#Type" /> 
+                                        <Property id="@type" />
                                         <whitespace />
-                                        <Condition id="@containment" value="1">
+                                        <!--<Condition id="@containment" value="1">
                                             *
-                                        </Condition>
+                                        </Condition>-->
                                         <Property id="@name" />;
                                     </Condition>
                                 </PropertyLoop>
                                 <br />
                                 <PropertyLoop id="operations">
-                                    <Condition id="@scope" value="public">
+                                    <Condition id="@scope" value="Public">
                                         <Optional>
                                             /** <br />
                                             <Property id="@note" newLine=" * "/>
                                             <br />
-                                            */<br />
+                                            <whitespace />*/<br />
                                         </Optional>
                                         <Condition id="@abstract" value="True">
                                             virtual <whitespace />
@@ -262,25 +262,25 @@
                                         <Condition id="@static" value="True">
                                             static <whitespace />
                                         </Condition>
-                                        <Condition id="@const" value="True">
+                                        <!--<Condition id="@const" value="True">
                                             const <whitespace />
-                                        </Condition>
-                                        <Property id="#Type" default="void" /> 
+                                        </Condition>-->
+                                        <Property id="@rtype" default="void" />
                                         <whitespace />
                                         <Property id="@name" />
                                         (
-                                        <PropertyLoop id="@Parameters" separator="," parse="params">
-                                            <Property id="@Type" /> <whitespace />
-                                            <Property id="@Name" />
+                                        <PropertyLoop id="@parameters" separator=", " parse="parameters">
+                                            <Property id="@type" /> <whitespace />
+                                            <Property id="@name" />
                                             <Optional>
                                                 =
-                                                <Property id="@Default" />
+                                                <Property id="@default" />
                                             </Optional>     
-                                        </PropertyLoop> 
+                                        </PropertyLoop>
                                         )
-                                        <Condition id="@isquery" value="True">
+                                        <!--<Condition id="@isquery" value="True">
                                             const <whitespace />
-                                        </Condition>
+                                        </Condition>-->
                                         <Condition id="@abstract" value="True">
                                             =0 
                                         </Condition>
@@ -306,22 +306,22 @@
                             /** <br />
                             <Property id="@note" newLine=" * "/>
                             <br />
-                            */<br />
+                            <whitespace />*/<br />
                         </Optional>
-                        <Property id="#Type" default="void" />
+                        <Property id="@rtype" default="void" />
                         <whitespace />
-                        <Property id="#fullname" />
+                        <Property id="#name" />
                         ::<Property id="@name" />
                         (
-                        <PropertyLoop id="@Parameters" separator="," parse="params">
-                            <Property id="@Type" /> <whitespace />
-                            <Property id="@Name" />
+                        <PropertyLoop id="@parameters" separator=", " parse="parameters">
+                            <Property id="@type" /> <whitespace />
+                            <Property id="@name" />
                         </PropertyLoop>
                         ){<br />
-                        <Indent required="False" defsize="4">
+                        <!--<Indent required="False" defsize="4">
                             <Property id="@initial" />
                             <br />
-                        </Indent>
+                        </Indent>-->
                         }<br />
                     </Indent>
                 </Condition>
