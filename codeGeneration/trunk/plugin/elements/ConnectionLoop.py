@@ -25,9 +25,10 @@ class CConnectionLoop(CCodeContainer):
         retFlag = False
         separatorFlag = False
         for id, item in enumerate(elementObject.connections):
-            if item.GetProperty(self.collection) == self.value or self.value == "All":
+            if item.type.name == self.value or self.value == "All":
+                continue #TODO: Should be reviewed and fixed so connections are looped properly
                 for i in self.childs:
-                    elementObject.__LOOPVARS__ = item.GetProperty()
+                    elementObject.__LOOPVARS__ = item
                     genList = i.Generate(elementObject, path, fil)
                     ret = self.JoinReturnValue(ret, genList)
                     if isinstance(i, CProperty) and genList[0]:
